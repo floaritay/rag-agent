@@ -1,0 +1,14 @@
+knowledge_bases:
+- name: demo
+  path: knowledge_base/demo
+- name: Agent开发
+  path: knowledge_base/Agent开发
+chunking:
+  chunk_size: 500
+  overlap: 80
+retrieval:
+  vector_k: 8
+  bm25_k: 8
+  rrf_k: 60
+  top_n: 6
+  rerank_enabled: true

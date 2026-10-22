@@ -1,0 +1,51 @@
+[project]
+name = "ragagent"
+version = "0.1.0"
+description = "个人本地 RAG-Agent：硅基流动模型 + FastAPI + React，纯 Web 形态"
+requires-python = ">=3.11"
+dependencies = [
+    # 服务与配置
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "PyYAML>=6.0",
+    "httpx>=0.27",
+    # LangChain / LangGraph（上界防 pip 升级已装栈）
+    "langchain>=1.3.11,<2.0",
+    "langchain-core>=1.4.8,<2.0",
+    "langchain-chroma>=1.1.0,<2.0",
+    "langchain-openai>=1.1.12,<2.0",
+    "langchain-classic>=1.0.8,<2.0",
+    "langgraph>=1.2.6,<2.0",
+    # 检索
+    "chromadb>=0.5",
+    "rank-bm25>=0.2.2",
+    "jieba>=0.42",
+    # 文档解析
+    "PyMuPDF>=1.24",
+    "python-docx>=1.1",
+    "python-pptx>=0.6.23",
+    "openpyxl>=3.1",
+    "python-multipart>=0.0.32",
+    # 图片处理（A：OCR 前处理/缩放；C：附图重编码）
+    "pillow>=10",
+    # 扫描件 PDF 解析通道（MinerU 云，需 .env 配 MinerU 密钥）
+    "mineru-open-sdk>=0.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ragagent"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

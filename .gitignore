@@ -1,0 +1,28 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# 敏感信息
+.env
+
+# 用户文档与运行时产物
+knowledge_base/*
+!knowledge_base/.gitkeep
+storage/
+
+# 前端
+src/ragagent/server/web/node_modules/
+src/ragagent/server/web/dist/
+
+# 评估产物
+eval_report.md
+
+# 内部工作文档与设计稿（含本机环境细节/私有设计资产，不随开源分发）
+HANDOFF.md
+PLAN.md
+META_PROMPT.md
+program.md
+RAG-Agent*.zip
+tests/
+src/ragagent/eval/

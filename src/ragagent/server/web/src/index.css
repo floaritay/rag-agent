@@ -1,0 +1,257 @@
+@import "tailwindcss";
+
+/* ============================================================
+   RAG-Agent 设计 token（从设计稿 head 原样移植）
+   单一主色 indigo #4f46e5，冷中性底；原型按深色渲染。
+   ============================================================ */
+:root {
+  /* Brand primary scale */
+  --rag-primary-50: #eef2ff;
+  --rag-primary-100: #e0e7ff;
+  --rag-primary-200: #c7d2fe;
+  --rag-primary-300: #a5b4fc;
+  --rag-primary-400: #818cf8;
+  --rag-primary-500: #6366f1;
+  --rag-primary-600: #4f46e5;
+  --rag-primary-700: #4338ca;
+  --rag-primary-800: #3730a3;
+  --rag-primary-900: #312e81;
+
+  /* Neutral scale */
+  --rag-neutral-0: #ffffff;
+  --rag-neutral-50: #f8fafc;
+  --rag-neutral-100: #f1f5f9;
+  --rag-neutral-200: #e2e8f0;
+  --rag-neutral-300: #cbd5e1;
+  --rag-neutral-400: #94a3b8;
+  --rag-neutral-500: #64748b;
+  --rag-neutral-600: #475569;
+  --rag-neutral-700: #334155;
+  --rag-neutral-800: #1e293b;
+  --rag-neutral-900: #0f172a;
+
+  /* Semantic aliases */
+  --rag-background: var(--rag-neutral-50);
+  --rag-foreground: var(--rag-neutral-900);
+  --rag-card: var(--rag-neutral-0);
+  --rag-card-foreground: var(--rag-neutral-900);
+  --rag-popover: var(--rag-neutral-0);
+  --rag-popover-foreground: var(--rag-neutral-900);
+  --rag-primary: var(--rag-primary-600);
+  --rag-primary-foreground: var(--rag-neutral-0);
+  --rag-secondary: var(--rag-neutral-100);
+  --rag-secondary-foreground: var(--rag-neutral-900);
+  --rag-muted: var(--rag-neutral-100);
+  --rag-muted-foreground: var(--rag-neutral-500);
+  --rag-accent: var(--rag-primary-50);
+  --rag-accent-foreground: var(--rag-primary-900);
+  --rag-border: var(--rag-neutral-200);
+  --rag-input: var(--rag-neutral-200);
+  --rag-ring: var(--rag-primary-400);
+  --rag-radius-sm: 4px;
+  --rag-radius-md: 8px;
+  --rag-radius-lg: 16px;
+
+  /* State colors */
+  --rag-state-success: #10b981;
+  --rag-state-warning: #f59e0b;
+  --rag-state-error: #ef4444;
+  --rag-state-info: var(--rag-primary-500);
+
+  /* Extended surface tokens */
+  --rag-surface: var(--rag-neutral-0);
+  --rag-surface-2: var(--rag-neutral-100);
+  --rag-ink: var(--rag-neutral-900);
+  --rag-ink-2: var(--rag-neutral-600);
+  --rag-ink-3: var(--rag-neutral-500);
+  --rag-line: var(--rag-neutral-200);
+  --rag-brand: var(--rag-primary-600);
+  --rag-brand-ink: var(--rag-neutral-0);
+
+  /* Typography */
+  --rag-font-sans: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --rag-font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Shadows */
+  --rag-shadow-1: 0 1px 2px rgba(15, 23, 42, 0.05), 0 1px 1px rgba(15, 23, 42, 0.03);
+  --rag-shadow-2: 0 8px 24px -8px rgba(15, 23, 42, 0.18);
+  --rag-shadow-3: 0 24px 60px -20px rgba(15, 23, 42, 0.30);
+}
+
+/* 深色覆盖（原型实际渲染的主题） */
+[data-theme="dark"],
+html.dark {
+  --rag-background: #0b0b0f;
+  --rag-foreground: var(--rag-neutral-50);
+  --rag-card: #14141a;
+  --rag-card-foreground: var(--rag-neutral-50);
+  --rag-popover: #14141a;
+  --rag-popover-foreground: var(--rag-neutral-50);
+  --rag-muted: #1e1e28;
+  --rag-muted-foreground: var(--rag-neutral-400);
+  --rag-border: #2a2a36;
+  --rag-input: #2a2a36;
+  --rag-surface: #14141a;
+  --rag-surface-2: #1e1e28;
+  --rag-ink: var(--rag-neutral-50);
+  --rag-ink-2: var(--rag-neutral-300);
+  --rag-ink-3: var(--rag-neutral-400);
+  --rag-line: #2a2a36;
+}
+
+/* Tailwind v4 桥接：语义色 → token */
+@theme inline {
+  --color-background: var(--rag-background);
+  --color-foreground: var(--rag-foreground);
+  --color-card: var(--rag-card);
+  --color-card-foreground: var(--rag-card-foreground);
+  --color-popover: var(--rag-popover);
+  --color-popover-foreground: var(--rag-popover-foreground);
+  --color-primary: var(--rag-primary);
+  --color-primary-foreground: var(--rag-primary-foreground);
+  --color-secondary: var(--rag-secondary);
+  --color-secondary-foreground: var(--rag-secondary-foreground);
+  --color-muted: var(--rag-muted);
+  --color-muted-foreground: var(--rag-muted-foreground);
+  --color-accent: var(--rag-accent);
+  --color-accent-foreground: var(--rag-accent-foreground);
+  --color-border: var(--rag-border);
+  --color-input: var(--rag-input);
+  --color-ring: var(--rag-ring);
+  --radius-sm: var(--rag-radius-sm);
+  --radius-md: var(--rag-radius-md);
+  --radius-lg: var(--rag-radius-lg);
+}
+
+@layer base {
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--rag-background);
+    color: var(--rag-foreground);
+    font-family: var(--rag-font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  td, th { word-break: auto-phrase; }
+  th { white-space: nowrap; }
+  summary { list-style: none; cursor: pointer; }
+  summary::-webkit-details-marker { display: none; }
+}
+
+/* ============================================================
+   关键布局骨架（原型 #critical-layout 原样移植）
+   ============================================================ */
+
+/* —— 对话页 —— */
+.app-root { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+.chat-shell { display: flex; flex: 1 1 auto; min-height: 0; margin-top: 64px; position: relative; }
+.chat-sidebar {
+  width: 260px;
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid var(--rag-border);
+}
+.chat-main { flex: 1 1 auto; display: flex; flex-direction: column; min-width: 0; }
+.message-scroll { flex: 1 1 auto; overflow-y: auto; min-height: 0; }
+.message-list { display: flex; flex-direction: column; }
+.input-area { flex: 0 0 auto; }
+@media (max-width: 1023px) {
+  .chat-sidebar {
+    position: absolute; left: 0; top: 0; bottom: 0; z-index: 40;
+    transform: translateX(-100%); transition: transform 200ms ease;
+    background: var(--rag-muted);
+  }
+  .chat-sidebar.is-open { transform: translateX(0); }
+}
+
+/* —— 知识库页 —— */
+.kb-page { display: flex; flex-direction: column; min-height: 100vh; }
+.kb-body { display: flex; flex: 1; padding-top: 64px; min-height: 0; }
+.kb-sidebar { width: 280px; flex-shrink: 0; }
+.kb-main { flex: 1; min-width: 0; overflow-x: auto; }
+.kb-stats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.kb-doc-table { width: 100%; border-collapse: collapse; }
+.kb-doc-table th,
+.kb-doc-table td { text-align: left; }
+@media (max-width: 1024px) {
+  .kb-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+  .kb-sidebar { display: none; }
+  .kb-stats-grid { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+}
+
+/* 引用来源卡：details 展开时箭头旋转（原型交互） */
+.source-chevron { transition: transform 200ms ease; }
+details[open] > summary .source-chevron { transform: rotate(180deg); }
+
+/* ============================================================
+   LLM 回答的 Markdown 内容
+   Tailwind preflight 会清掉默认段落间距/列表圆点/标题字号，
+   必须显式恢复，否则 mdToHtml 的输出呈扁平纯文本。
+   ============================================================ */
+.md p { margin: 8px 0; line-height: 1.7; }
+.md p:first-child { margin-top: 0; }
+.md p:last-child { margin-bottom: 0; }
+.md ul { margin: 8px 0; padding-left: 22px; list-style: disc; }
+.md li { margin: 4px 0; line-height: 1.65; }
+.md li::marker { color: var(--rag-primary-400); }
+.md h3, .md h4, .md h5, .md h6 {
+  margin: 14px 0 6px; font-weight: 600; line-height: 1.4; color: var(--rag-foreground);
+}
+.md h3 { font-size: 16.5px; }
+.md h4 { font-size: 15.5px; }
+.md h5, .md h6 { font-size: 14.5px; }
+.md code {
+  background: var(--rag-muted); color: var(--rag-primary-300);
+  padding: 1px 5px; border-radius: 4px;
+  font-family: var(--rag-font-mono); font-size: 0.92em;
+}
+.cite-tag {
+  background: color-mix(in srgb, var(--rag-primary) 18%, transparent);
+  color: var(--rag-primary-300); border-radius: 4px;
+  padding: 0 5px; font-size: 12.5px;
+}
+
+/* GFM 表格（mdToHtml 输出的 .md-table*） */
+.md-table-wrap {
+  margin: 10px 0; overflow-x: auto;
+  border: 1px solid var(--rag-border); border-radius: 8px;
+}
+.md-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.md-table th, .md-table td {
+  padding: 7px 10px; border-bottom: 1px solid var(--rag-border);
+  text-align: left; line-height: 1.55; vertical-align: top;
+}
+.md-table th {
+  background: var(--rag-muted); color: var(--rag-foreground);
+  font-weight: 600; white-space: nowrap;
+}
+.md-table tbody tr:last-child td { border-bottom: none; }
+.md-table tbody tr:hover { background: color-mix(in srgb, var(--rag-muted) 60%, transparent); }
+
+/* ``` 代码块（覆盖行内 code 样式） */
+.md-pre {
+  margin: 10px 0; padding: 10px 12px; overflow-x: auto;
+  background: var(--rag-muted); border: 1px solid var(--rag-border); border-radius: 8px;
+}
+.md-pre code {
+  background: none; padding: 0; color: var(--rag-ink-2);
+  font-family: var(--rag-font-mono); font-size: 12.5px; white-space: pre;
+}
+
+/* > 引用块 */
+.md-quote {
+  margin: 10px 0; padding: 8px 12px;
+  border-left: 3px solid var(--rag-primary-400);
+  background: var(--rag-muted); border-radius: 0 8px 8px 0;
+  color: var(--rag-muted-foreground);
+}
+.md-quote p { margin: 4px 0; }
+
+/* 深色滚动条 */
+* { scrollbar-width: thin; scrollbar-color: var(--rag-border) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--rag-border); border-radius: 4px; }
+*::-webkit-scrollbar-track { background: transparent; }
